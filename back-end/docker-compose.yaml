@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:latest
+    container_name: db
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=otomobil_db
+    volumes:
+      - db_vol:/var/lib/mysql
+    networks:
+      - otomobil_net
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - 8080:80
+    environment:
+      - PMA_HOST=db
+    networks:
+      - otomobil_net
+
+networks:
+  otomobil_net:
+    driver: bridge
+
+volumes:
+  db_vol:
+    driver: local
