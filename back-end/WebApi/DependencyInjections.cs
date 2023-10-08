@@ -1,4 +1,5 @@
 using WebApi.Repositories.Users;
+using WebApi.Services.Password;
 using WebApi.Services.Users;
 
 namespace WebApi;
@@ -12,6 +13,7 @@ public static class DependencyInjections {
 
      public static IServiceCollection RegisterServices(this IServiceCollection services){
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IPasswordService, PasswordService>();
         
         return services;
     }
