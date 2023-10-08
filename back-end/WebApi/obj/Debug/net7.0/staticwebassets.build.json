@@ -1,11 +1,54 @@
 {
   "Version": 1,
-  "Hash": "lAVsf4/XP8OL4a3UKcpKodesbBfBaGYqErDYy8hI7Xs=",
+  "Hash": "/cBCSe3uRHfNwcgQENQ1BPP9A4osRLh7uWivA6saDmI=",
   "Source": "WebApi",
   "BasePath": "_content/WebApi",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "WebApi/wwwroot",
+      "Source": "WebApi",
+      "ContentRoot": "/codingid/projects/codingid_final_project/back-end/WebApi/wwwroot/",
+      "BasePath": "_content/WebApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/codingid/projects/codingid_final_project/back-end/WebApi/wwwroot/images/05:59:28_08-10-2023.png",
+      "SourceId": "WebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "/codingid/projects/codingid_final_project/back-end/WebApi/wwwroot/",
+      "BasePath": "_content/WebApi",
+      "RelativePath": "images/05:59:28_08-10-2023.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/05:59:28_08-10-2023.png"
+    },
+    {
+      "Identity": "/codingid/projects/codingid_final_project/back-end/WebApi/wwwroot/images/06:02:12_08-10-2023.png",
+      "SourceId": "WebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "/codingid/projects/codingid_final_project/back-end/WebApi/wwwroot/",
+      "BasePath": "_content/WebApi",
+      "RelativePath": "images/06:02:12_08-10-2023.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/06:02:12_08-10-2023.png"
+    }
+  ]
 }

@@ -61,3 +61,4 @@
 /codingid/projects/codingid_final_project/back-end/WebApi/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /codingid/projects/codingid_final_project/back-end/WebApi/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
 /codingid/projects/codingid_final_project/back-end/WebApi/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/codingid/projects/codingid_final_project/back-end/WebApi/bin/Debug/net7.0/WebApi.staticwebassets.runtime.json

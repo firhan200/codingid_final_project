@@ -30,7 +30,7 @@ public class TokenService : ITokenService
         //set jwt config
         var token = new JwtSecurityToken(
             claims: claims,
-            expires: DateTime.UtcNow.AddSeconds(30),
+            expires: DateTime.UtcNow.AddHours(3),
             signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)), SecurityAlgorithms.HmacSha512)
         );
 

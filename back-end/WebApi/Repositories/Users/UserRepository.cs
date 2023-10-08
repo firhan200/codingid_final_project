@@ -50,12 +50,70 @@ public class UserRepository : IUserRepository
 
     public bool Delete(int Id)
     {
-        throw new NotImplementedException();
+        bool isSuccess = false;
+
+        using (MySqlConnection connection = new MySqlConnection(_connectionString))
+        {
+            connection.Open();
+
+            using (MySqlCommand command = new MySqlCommand
+            {
+                Connection = connection
+            })
+            {
+                command.CommandText = "UPDATE users SET status=0 WHERE id=@id";
+                command.Parameters.AddWithValue("@id", Id);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    isSuccess = true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            connection.Close();
+        }
+
+        return isSuccess;
     }
 
     public List<User> GetAll()
     {
-        throw new NotImplementedException();
+        List<User> users = new List<User>();
+
+        using (MySqlConnection connection = new MySqlConnection(_connectionString))
+        {
+            connection.Open();
+
+            using (MySqlCommand command = new MySqlCommand
+            {
+                Connection = connection
+            })
+            {
+                command.CommandText = "SELECT id, name, email, status FROM users";
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    users.Add(new User
+                    {
+                        Id = Convert.ToInt32(reader[0]),
+                        Name = reader[1].ToString() ?? string.Empty,
+                        Email = reader[2].ToString() ?? string.Empty,
+                        Status = Convert.ToBoolean(reader[3]),
+                    });
+                }
+            }
+
+            connection.Close();
+        }
+
+        return users;
     }
 
     public User? GetByEmail(string email)
@@ -137,11 +195,72 @@ public class UserRepository : IUserRepository
 
     public User? GetById(int Id)
     {
-        throw new NotImplementedException();
+        User? user = null;
+
+        using (MySqlConnection connection = new MySqlConnection(_connectionString))
+        {
+            connection.Open();
+
+            using (MySqlCommand command = new MySqlCommand
+            {
+                Connection = connection
+            })
+            {
+                command.CommandText = "SELECT id, name, email, role, status FROM users WHERE id=@id";
+                command.Parameters.AddWithValue("@id", Id);
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    user = new User
+                    {
+                        Id = Convert.ToInt32(reader[0]),
+                        Name = reader[1].ToString() ?? string.Empty,
+                        Email = reader[2].ToString() ?? string.Empty,
+                        Role = reader[3].ToString() ?? string.Empty,
+                    };
+
+                    break;
+                }
+            }
+
+            connection.Close();
+        }
+
+        return user;
     }
 
     public User Update(User user)
     {
-        throw new NotImplementedException();
+        using (MySqlConnection connection = new MySqlConnection(_connectionString))
+        {
+            connection.Open();
+
+            using (MySqlCommand command = new MySqlCommand
+            {
+                Connection = connection
+            })
+            {
+                command.CommandText = "UPDATE users SET name=@name, status=@status WHERE id=@id";
+                command.Parameters.AddWithValue("@name", user.Name);
+                command.Parameters.AddWithValue("@email", user.Email);
+                command.Parameters.AddWithValue("@role", user.Status);
+                command.Parameters.AddWithValue("@id", user.Id);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            connection.Close();
+        }
+
+        return user;
     }
 }
