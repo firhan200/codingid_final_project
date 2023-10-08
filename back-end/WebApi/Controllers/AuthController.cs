@@ -15,15 +15,19 @@ public class AuthController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPost("Login")]
+    [HttpPost("Login", Name = "Login with Email & Password")]
     public IResult Login([FromBody] LoginRequest loginRequest)
     {
         LoginResponse resp = _userService.Login(loginRequest.Email, loginRequest.Password);
 
+        if(!string.IsNullOrEmpty(resp.Error)){
+            return Results.NotFound(resp);
+        }
+
         return Results.Ok(resp);
     }
 
-    [HttpPost("Register")]
+    [HttpPost("Register", Name = "Register new user account")]
     public IResult Register([FromBody] RegisterRequest registerRequest)
     {
         RegisterResponse resp = _userService.Register(registerRequest.Name, registerRequest.Email, registerRequest.Password);

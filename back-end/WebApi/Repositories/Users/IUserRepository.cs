@@ -4,6 +4,7 @@ namespace WebApi.Repositories.Users;
 
 public interface IUserRepository {
     List<User> GetAll();
+    User? GetByEmail(string email);
     User? GetByEmailAndPassword(string email, string password);
     User? GetById(int Id);
     User Create(User user);

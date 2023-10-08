@@ -21,18 +21,23 @@ public class UserRepository : IUserRepository
         {
             connection.Open();
 
-            using(MySqlCommand command = new MySqlCommand{
+            using (MySqlCommand command = new MySqlCommand
+            {
                 Connection = connection
-            }){
+            })
+            {
                 command.CommandText = "INSERT INTO users(name, email, password, role) VALUES (@name, @email, @password, @role)";
                 command.Parameters.AddWithValue("@name", user.Name);
                 command.Parameters.AddWithValue("@email", user.Email);
                 command.Parameters.AddWithValue("@password", user.Password);
                 command.Parameters.AddWithValue("@role", user.Role);
 
-                try{
+                try
+                {
                     command.ExecuteNonQuery();
-                }catch(Exception ex){
+                }
+                catch (Exception ex)
+                {
                     Console.WriteLine(ex.Message);
                 }
             }
@@ -53,11 +58,81 @@ public class UserRepository : IUserRepository
         throw new NotImplementedException();
     }
 
+    public User? GetByEmail(string email)
+    {
+        User? user = null;
+
+        using (MySqlConnection connection = new MySqlConnection(_connectionString))
+        {
+            connection.Open();
+
+            using (MySqlCommand command = new MySqlCommand
+            {
+                Connection = connection
+            })
+            {
+                command.CommandText = "SELECT id, name, email, role FROM users WHERE email=@email";
+                command.Parameters.AddWithValue("@email", email);
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    user = new User
+                    {
+                        Id = Convert.ToInt32(reader[0]),
+                        Name = reader[1].ToString() ?? string.Empty,
+                        Email = reader[2].ToString() ?? string.Empty,
+                        Role = reader[3].ToString() ?? string.Empty,
+                    };
+
+                    break;
+                }
+            }
+
+            connection.Close();
+        }
+
+        return user;
+    }
+
     public User? GetByEmailAndPassword(string email, string password)
     {
-        Console.WriteLine("GetByEmailAndPassword: " + email + " and " + password);
+        User? user = null;
 
-        return null;
+        using (MySqlConnection connection = new MySqlConnection(_connectionString))
+        {
+            connection.Open();
+
+            using (MySqlCommand command = new MySqlCommand
+            {
+                Connection = connection
+            })
+            {
+                command.CommandText = "SELECT id, name, email, role FROM users WHERE email=@email AND password=@password";
+                command.Parameters.AddWithValue("@email", email);
+                command.Parameters.AddWithValue("@password", password);
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    user = new User
+                    {
+                        Id = Convert.ToInt32(reader[0]),
+                        Name = reader[1].ToString() ?? string.Empty,
+                        Email = reader[2].ToString() ?? string.Empty,
+                        Role = reader[3].ToString() ?? string.Empty,
+                    };
+
+                    break;
+                }
+            }
+
+            connection.Close();
+        }
+
+        return user;
     }
 
     public User? GetById(int Id)

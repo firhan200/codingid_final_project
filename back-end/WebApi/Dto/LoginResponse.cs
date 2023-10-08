@@ -4,5 +4,5 @@ public record LoginResponse
 {
     public string? Error { get; set; }
     public string? Token { get; set; } = null;
-    public string? Role { get; set; }
+    public UserInformation? User { get; set; }
 }
